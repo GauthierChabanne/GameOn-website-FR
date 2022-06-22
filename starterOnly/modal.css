@@ -67,6 +67,16 @@ img {
 .topnav .icon {
   display: none;
 }
+.modal-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#validation-modal .btn-submit,
+.btn-signup {
+  margin-top: 8rem;
+}
 
 @media screen and (max-width: 768px) {
   .topnav a {display: none;}
@@ -96,6 +106,24 @@ img {
     float: right;
     display: block;
   }
+
+  #form-modal {
+    background-color: transparent;
+  }
+
+  #validation-modal {
+    background-color: transparent;
+  }
+
+  .content {
+    top: 3rem;
+    height: 90%;
+  }
+
+  #validation-modal .btn-submit {
+    position: absolute;
+    bottom: 50px;
+  }
 }
 
 main {
@@ -110,6 +138,10 @@ main {
   text-align: justify;
 
 
+}
+
+#validation-modal-header h1{
+  text-align: center;
 }
 
 .modal-btn {
@@ -178,7 +210,7 @@ main {
   animation-duration: var(--modal-duration);
   background: #232323;
   border-radius: 10px;
-  overflow: hidden;
+  overflow: scroll;
   position: relative;
   color: #fff;
   padding-top: 10px;
@@ -425,7 +457,6 @@ input[data-error]::after {
   font-size: 16px;
 }
 .hero-section {
-  min-height: 93vh;
   border-radius: 10px;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -440,6 +471,7 @@ input[data-error]::after {
   color: #fff;
   position: relative;
   text-align: left;
+  width: 100%;
 }
 .hero-content::after {
   content: "";
