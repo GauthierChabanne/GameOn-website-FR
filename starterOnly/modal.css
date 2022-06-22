@@ -99,8 +99,6 @@ img {
 
 @media screen and (max-width: 768px) {
   .topnav.responsive {position: relative;}
-  .topnav.responsive .icon {
-  }
   .topnav.responsive a {
     float: right;
     display: block;
