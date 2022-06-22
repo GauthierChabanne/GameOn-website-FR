@@ -18,6 +18,11 @@ const form = document.querySelector("form");
 //inputs
 const firstNameInput = document.querySelector("#first");
 const lastNameInput = document.querySelector("#last");
+const emailInput = document.querySelector("#email");
+const birthDateInput = document.querySelector("#birthdate");
+const quantityInput = document.querySelector("#quantity");
+let checkedCheckboxInput = null;
+const conditionCheckboxInput = document.querySelector("#checkbox1")
 
 //error messages
 const errorMessages = document.querySelectorAll(".error-message")
@@ -44,7 +49,7 @@ function closeValidationModal() {
 function validate() {
 
   errors = []
-
+  checkedCheckboxInput = document.querySelector("input[name='location']:checked")
   //check si le prénom n'est pas vide et a plus de 2 caractères
   if (firstNameInput.value === "" || firstNameInput.value.length < 2 || /([aA-zZ]*)([\\s\\\'-][aA-zZ]*)*/.test(firstNameInput.value) == false) {
     errors.push("first-name-error");
@@ -56,41 +61,45 @@ function validate() {
   }
 
   //Check que l'adresse mail rentrée correspond bien à une adresse mail réglementaire grâce à une regex
-  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(document.querySelector("#email").value) === false) {
+  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(emailInput.value) === false) {
     errors.push("email-error");
   }
 
   //Check que la date ne soit pas vide
-  if (document.querySelector("#birthdate").value === "") {
+  if (birthDateInput.value === "") {
     errors.push("birthdate-error");
   }
 
   //Check qu'est bien été rentré un nombre grâce à une regex
-  if (/[0-9]+/.test(document.querySelector("#quantity").value) === false) {
+  if (/[0-9]+/.test(quantityInput.value) === false) {
     errors.push("quantity-error");
   }
 
   // Vérifie qu'au moins un des radios buttons avec le nom location a été coché en echeckant si il en existe au moins un
   // avec l'attribut checked
-  if (document.querySelector("input[name='location']:checked") == null) {
+  if (checkedCheckboxInput == null) {
     errors.push("location-error");
   }
 
   // Vérifie que la checkbox condition d'utilisation est bien checké
-  if (document.querySelector("#checkbox1").checked == false) {
+  if (conditionCheckboxInput.checked == false) {
     errors.push("utilisation-condition-error");
   }
   return errors;
 }
 
 form.addEventListener("submit", function(e) {
-  console.log("Hello");
   e.preventDefault();
+  errorMessages.forEach(errorMessage => {
+      errorMessage.style.display = "none";
+  })
   validate();
   if (errors.length === 0) {
+    console.log(firstNameInput.value, lastNameInput.value, emailInput.value, birthDateInput.value, quantityInput.value, checkedCheckboxInput.value, conditionCheckboxInput.value)
     formData.forEach(data => {
       data.querySelector("input").value = ""
     });
+    checkedCheckboxInput.checked = false
     closeFormModal();
     validationModalbg.style.display = "block";
   } else {

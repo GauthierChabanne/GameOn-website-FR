@@ -243,12 +243,8 @@ input {
 .error-message {
   display: none;
   font-size: 0.8rem;
-  border: 1px solid;
-  margin-top: 1rem;
-  padding: 0.5rem;
-  color: lightgoldenrodyellow;
-  background-color: darkred;
-  border-radius: 10px;
+  margin-top: 0.5rem;
+  color: red;
 }
 
 .text-control {
