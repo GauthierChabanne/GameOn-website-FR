@@ -58,6 +58,11 @@ img {
   border-radius: 15px;
 }
 
+.topnav .icon:hover {
+  background-color: transparent;
+  opacity: 0.8;
+}
+
 .topnav a.active {
   background-color: #ff0000;
   color: #ffffff;
@@ -84,17 +89,20 @@ img {
     float: right;
     display: block;
   }
+
+  .main-navbar {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+  }
 }
 
 @media screen and (max-width: 768px) {
   .topnav.responsive {position: relative;}
   .topnav.responsive .icon {
-    position: absolute;
-    right: 0;
-    top: 0;
   }
   .topnav.responsive a {
-    float: none;
+    float: right;
     display: block;
     text-align: left;
   }
