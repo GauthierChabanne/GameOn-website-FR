@@ -8,13 +8,13 @@ function editNav() {
 }
 
 // DOM Elements
+
 const formModalbg = document.querySelector("#form-modal");
 const validationModalbg = document.querySelector("#validation-modal");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 //form
 const form = document.querySelector("form");
-
 //inputs
 const firstNameInput = document.querySelector("#first");
 const lastNameInput = document.querySelector("#last");
@@ -23,7 +23,6 @@ const birthDateInput = document.querySelector("#birthdate");
 const quantityInput = document.querySelector("#quantity");
 let checkedCheckboxInput = null;
 const conditionCheckboxInput = document.querySelector("#checkbox1")
-
 //error messages
 const errorMessages = document.querySelectorAll(".error-message")
 
@@ -47,11 +46,12 @@ function closeValidationModal() {
 
 // Regarde si les informations remplies sont valides
 function validate() {
-
+  //Va permettre de stocker les erreurs du formulaire
   errors = []
   checkedCheckboxInput = document.querySelector("input[name='location']:checked")
-  //check si le prénom n'est pas vide et a plus de 2 caractères
+  //check si le prénom n'est pas vide, a plus de 2 caractères, et à un format valide
   if (firstNameInput.value === "" || firstNameInput.value.length < 2 || /([aA-zZ]*)([\\s\\\'-][aA-zZ]*)*/.test(firstNameInput.value) == false) {
+    //en cas d'erreur, stock le nom de l'erreur dans l'array errors
     errors.push("first-name-error");
   };
 
@@ -88,24 +88,38 @@ function validate() {
   return errors;
 }
 
+// Function qui va se lancé dès la soumission du formulaire
 form.addEventListener("submit", function(e) {
+  // empêche le rechargement de la page
   e.preventDefault();
+  // fait disparaître chacun des messages d'erreurs.
   errorMessages.forEach(errorMessage => {
       errorMessage.style.display = "none";
   })
+  // lance la fonction pour vérifier que les champs rentrés dans le formulaire sont valides
   validate();
+  //Si aucune erreur est décelé
   if (errors.length === 0) {
+    //envoie la valeur de tous les champs rentrées dans le formulaire sur la console
     console.log(firstNameInput.value, lastNameInput.value, emailInput.value, birthDateInput.value, quantityInput.value, checkedCheckboxInput.value, conditionCheckboxInput.value)
+    //rénitialise tous les champs du formulaire pour une future utilisation
     formData.forEach(data => {
       data.querySelector("input").value = ""
     });
     checkedCheckboxInput.checked = false
+    //ferme la modale avec le formulaire
     closeFormModal();
+    // montre la modale avec le message de succès
     validationModalbg.style.display = "block";
+    //en cas de détection d'une ou plusieurs erreurs
   } else {
+    // check le nom de chacune des erreurs dans errors
     errors.forEach(error => {
+      //compare le nom de l'erreur avec l'id de chacun des messages d'erreur
       errorMessages.forEach(errorMessage => {
+        //Si l'erreur et l'un des messages d'erreur ont le même nom
         if(errorMessage.id == error) {
+          //Montre le message d'erreur
           errorMessage.style.display = "block";
         }
       })
